@@ -60,7 +60,7 @@ public class ToDoServiceTest
         CreateToDoRequest dto = new CreateToDoRequest("Deneme", "Content", "2024-01-01", "2024-01-05", 1, "High");
         ToDo todo = new ToDo
         {
-            Id = new Guid("{6C95E9E2-3ECE-4465-8A1D-8E38CA2BFFDC}"),
+            Id = new Guid("{E1D5A9A5-2A12-4767-8C55-67D8EBF084DB}"),
             Title = "Deneme",
             Description = "Görev", 
             StartDate = DateTime.Parse("2024-01-01"),
@@ -68,13 +68,13 @@ public class ToDoServiceTest
             Priority = Priority.High, 
             CategoryId = 1, 
             Completed = false, 
-            UserId = "{5C95E9E2-3ECE-4465-8A1D-8E38CA2BFFDC}",
+            UserId = "{9A7E7F27-3D3C-48E4-93D7-C715B7E0F67F}",
             CreatedDate = DateTime.Now 
         };
 
         ToDoResponseDto response = new ToDoResponseDto
         {
-            Id = new Guid("{6C95E9E2-3ECE-4465-8A1D-8E38CA2BFFDC}"),
+            Id = new Guid("{E1D5A9A5-2A12-4767-8C55-67D8EBF084DB}"),
             Title = "Deneme",
             Description = "Deneme",
             StartDate = DateTime.Parse("2024-01-01"),
@@ -100,7 +100,7 @@ public class ToDoServiceTest
     public async Task GetById_WhenToDoIsNotPresent_ThrowsException()
     {
         // Arange 
-        Guid id = new Guid("{BA663833-98D6-4BE6-93C3-65997006B13A}");
+        Guid id = new Guid("{D0A5C827-9C98-47E9-A5C7-B81576D48F6A}");
         ToDo todo = null;
         rulesMock.Setup(x => x.ToDoIsNullCheck(todo)).Throws(new NotFoundException("İlgili todo bulunamadı."));
 
@@ -113,14 +113,14 @@ public class ToDoServiceTest
     {
         ToDo todo = new ToDo
         {
-            Id = new Guid("{BA663833-98D6-4BE6-93C3-65997006B13A}")
+            Id = new Guid("{D0A5C827-9C98-47E9-A5C7-B81576D48F6A}")
         };
 
-        Guid id = new Guid("{BA663833-98D6-4BE6-93C3-65997006B13A}");
+        Guid id = new Guid("{D0A5C827-9C98-47E9-A5C7-B81576D48F6A}");
 
         ToDoResponseDto response = new ToDoResponseDto
         {
-            Id = new Guid("{6C95E9E2-3ECE-4465-8A1D-8E38CA2BFFDD}"),
+            Id = new Guid("{E1A4F7A6-6F48-4D7C-8E6E-739A871BF982}"),
             Title = "Deneme",
             Description = "Deneme",
             StartDate = DateTime.Parse("2024-01-01"),

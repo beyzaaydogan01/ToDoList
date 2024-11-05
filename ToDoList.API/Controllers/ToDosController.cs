@@ -69,6 +69,27 @@ namespace ToDoList.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("getallCompleted")]
+        public async Task<IActionResult> GetAllCompletedAsync()
+        {
+            var result = await toDoService.GetAllCompletedAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("getallByDateRange")]
+        public async Task<IActionResult> GetByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            var result = await toDoService.GetByDateRangeAsync(startDate, endDate);
+            return Ok(result);
+        }
+
+        [HttpGet("getTodayTasks")]
+        public async Task<IActionResult> GetTodayTasksAsync()
+        {
+            var result = await toDoService.GetTodayTasksAsync();
+            return Ok(result);
+        }
+
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAsync([FromQuery] Guid id)
         {

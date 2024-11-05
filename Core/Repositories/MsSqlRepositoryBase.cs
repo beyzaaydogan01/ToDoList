@@ -14,29 +14,49 @@ public class MsSqlRepositoryBase<TContext, TEntity, TId> : IRepository<TEntity, 
     {
         Context = context;
     }
-
-    public Task<TEntity?> AddAsync(TEntity entity)
+    public async Task<TEntity?> AddAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        entity.CreatedDate = DateTime.Now;
+        await Context.Set<TEntity>().AddAsync(entity);
+        await Context.SaveChangesAsync();
+
+        return entity;
     }
 
-    public Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null, bool enableAutoInclude = true)
+    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null, bool enableAutoInclude = true)
     {
-        throw new NotImplementedException();
+        IQueryable<TEntity> query = Context.Set<TEntity>();
+
+        if (filter is not null)
+        {
+            query = query.Where(filter);
+        }
+
+        if (enableAutoInclude is false)
+        {
+            query = query.IgnoreAutoIncludes();
+        }
+
+        return await query.ToListAsync();
     }
 
-    public Task<TEntity?> GetByIdAsync(TId id)
+    public async Task<TEntity?> GetByIdAsync(TId id)
     {
-        throw new NotImplementedException();
+        return await Context.Set<TEntity>().FindAsync(id);
     }
 
-    public Task<TEntity?> RemoveAsync(TEntity entity)
+    public async Task<TEntity?> RemoveAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        Context.Set<TEntity>().Remove(entity);
+        await Context.SaveChangesAsync();
+        return entity;
     }
 
-    public Task<TEntity?> UpdateAsync(TEntity entity)
+    public async Task<TEntity?> UpdateAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        entity.UpdatedDate = DateTime.Now;
+        Context.Set<TEntity>().Update(entity);
+        await Context.SaveChangesAsync();
+        return entity;
     }
 }

@@ -177,6 +177,70 @@ public sealed class ToDoService(IToDoRepository toDoRepository,
         }
     }
 
+    public async Task<ReturnModel<List<ToDoResponseDto>>> GetAllCompletedAsync()
+    {
+        try
+        {
+            var todos = await toDoRepository.GetAllAsync(t => t.Completed.Equals(true));
+            List<ToDoResponseDto> responseDtos = mapper.Map<List<ToDoResponseDto>>(todos);
+
+            return new ReturnModel<List<ToDoResponseDto>>
+            {
+                Data = responseDtos,
+                Message = "Tamamlanmış görevler listelendi",
+                StatusCode = 200,
+                Success = true
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new BusinessException(ex.Message);
+        }
+    }
+
+    public async Task<ReturnModel<List<ToDoResponseDto>>> GetByDateRangeAsync(DateTime startDate, DateTime endDate)
+    {
+        try
+        {
+            var todos = await toDoRepository.GetAllAsync(t => t.StartDate >= startDate && t.EndDate <= endDate);
+            List<ToDoResponseDto> responseDtos = mapper.Map<List<ToDoResponseDto>>(todos);
+
+            return new ReturnModel<List<ToDoResponseDto>>
+            {
+                Data = responseDtos,
+                Message = "Belirtilen tarih aralığındaki görevler listelendi",
+                StatusCode = 200,
+                Success = true
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new BusinessException(ex.Message);
+        }
+    }
+
+    public async Task<ReturnModel<List<ToDoResponseDto>>> GetTodayTasksAsync()
+    {
+        try
+        {
+            var today = DateTime.Today;
+            var todos = await toDoRepository.GetAllAsync(t => t.StartDate.Date == today);
+            List<ToDoResponseDto> responseDtos = mapper.Map<List<ToDoResponseDto>>(todos);
+
+            return new ReturnModel<List<ToDoResponseDto>>
+            {
+                Data = responseDtos,
+                Message = "Bugünkü görevler listelendi",
+                StatusCode = 200,
+                Success = true
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new BusinessException(ex.Message);
+        }
+    }
+
     public async Task<ReturnModel<ToDoResponseDto>> GetByIdAsync(Guid id)
     {
         try

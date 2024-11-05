@@ -39,6 +39,17 @@ namespace ToDoList.API.Middlewares
                 return true;
             }
 
+            if (exception.GetType() == typeof(UnauthorizedAccessException))
+            {
+                httpContext.Response.StatusCode = 401;
+                Errors.Success = false;
+                Errors.Message = exception.Message;
+                Errors.StatusCode = 401;
+                await httpContext.Response.WriteAsync(JsonSerializer.Serialize(Errors));
+
+                return true;
+            }
+
             if (exception.GetType() == typeof(ValidationException))
             {
                 httpContext.Response.StatusCode = 400;
@@ -47,7 +58,6 @@ namespace ToDoList.API.Middlewares
                 Errors.Message = exception.Message;
                 Errors.StatusCode = 400;
             }
-
 
             Errors.StatusCode = 500;
             Errors.Message = exception.Message;
