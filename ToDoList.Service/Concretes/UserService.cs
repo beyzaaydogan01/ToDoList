@@ -29,7 +29,6 @@ public sealed class UserService(UserManager<User> _userManager,
         }
     }
 
-
     public async Task<string> DeleteAsync(string id)
     {
         try
@@ -88,7 +87,6 @@ public sealed class UserService(UserManager<User> _userManager,
         {
             throw new Exception(ex.Message);
         }
-
     }
 
     public async Task<User> RegisterAsync(RegisterRequestDto dto)
@@ -115,7 +113,6 @@ public sealed class UserService(UserManager<User> _userManager,
         {
             throw new Exception(ex.Message);
         }
-
     }
 
     public async Task<User> UpdateAsync(string id, UserUpdateRequestDto dto)

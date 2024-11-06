@@ -21,6 +21,7 @@ public sealed class ToDoService(IToDoRepository toDoRepository,
         try
         {
             ToDo createdToDo = mapper.Map<ToDo>(create);
+            createdToDo.Id = Guid.NewGuid();
 
             businessRules.ToDoEndDateMustBeValid(createdToDo.EndDate);
 

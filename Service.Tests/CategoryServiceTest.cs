@@ -33,7 +33,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public async Task AddAsync_ShouldReturnSuccess_WhenCategoryIsValid()
+        public async Task AddAsync_WhenCategoryIsValid_ReturnSuccess()
         {
             // Arrange
             CreateCategoryRequest createRequest = new CreateCategoryRequest ("deneme");
@@ -61,7 +61,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public void AddAsync_ShouldThrowNotFoundException_WhenCategoryIsNull()
+        public void AddAsync_WhenCategoryIsNull_ThrowNotFoundException()
         {
             // Arrange
             CreateCategoryRequest createRequest = new CreateCategoryRequest("deneme");
@@ -72,7 +72,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public async Task GetByIdAsync_ShouldReturnCategory_WhenCategoryExists()
+        public async Task GetByIdAsync_WhenCategoryExists_ReturnSuccess()
         {
             // Arrange
             var id = 1;
@@ -99,7 +99,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public void GetByIdAsync_ShouldThrowNotFoundException_WhenCategoryDoesNotExist()
+        public void GetByIdAsync_WhenCategoryDoesNotExist_ThrowNotFoundException()
         {
             // Arrange
             var id = 1;
@@ -110,7 +110,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public async Task DeleteAsync_ShouldReturnSuccess_WhenCategoryExists()
+        public async Task DeleteAsync_WhenCategoryExists_ReturnSuccess()
         {
             // Arrange
             var id = 1;
@@ -138,7 +138,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public async Task GetAllAsync_ShouldReturnAllCategories()
+        public async Task GetAllAsync_ReturnAllCategories()
         {
             // Arrange
             List<Category> categories = new List<Category>();
@@ -159,7 +159,7 @@ namespace ToDoList.Tests.Service
         }
 
         [Test]
-        public async Task UpdateAsync_ShouldReturnSuccess_WhenCategoryIsUpdated()
+        public async Task UpdateAsync_WhenCategoryIsUpdated_ReturnSuccess()
         {
             // Arrange
             UpdateCategoryRequest updateRequest = new UpdateCategoryRequest ( "deneme" );
